@@ -1,0 +1,34 @@
+.login-card-header {
+  background-color: purple;
+  color: white;
+  height: 70px;
+}
+
+.login-modal-container {
+  position: absolute;
+  top: 15%;
+  left: calc(50vw - 175px);
+  width: 350px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.login-tab-panel {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
