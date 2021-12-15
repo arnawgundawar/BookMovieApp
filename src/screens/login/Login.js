@@ -24,6 +24,10 @@ export default function Login(props) {
     Modal.setAppElement("#header-login-button");
   });
 
+  React.useEffect(() => {
+    props.compRef.current = toggleModalState;
+  }, [])
+
   const user = useUser();
   const updateUser = useUserUpdate();
 
@@ -45,7 +49,7 @@ export default function Login(props) {
   }
 
   function handleLogout() {
-    AuthService.logout(user.accessToken);
+    // AuthService.logout(user.accessToken);
     updateUser({
       accessToken: undefined,
       emailAddress: undefined,
@@ -61,7 +65,7 @@ export default function Login(props) {
         <Button
           variant="contained"
           className="header-login-btn"
-          color="primary"
+          color="default"
           onClick={toggleModalState}
         >
           Login
@@ -99,7 +103,7 @@ export default function Login(props) {
         <Button
           variant="contained"
           className="header-login-btn"
-          color="secondary"
+          color="default"
           onClick={handleLogout}
         >
           Logout

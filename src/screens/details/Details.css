@@ -1,0 +1,31 @@
+.details-container {
+    display: flex;
+    margin-top: 52px;
+    flex-direction: column;
+}
+
+.back-btn {
+    /* top | right | bottom | left */
+    margin: 8px 0 0 24px !important;
+    cursor: pointer;
+}
+
+.details {
+    margin: 12px 24px 0px;
+    display: flex;
+}
+
+.poster {
+    width: 20%;
+}
+.info {
+    margin: 0 16px;
+    width: 60%;
+}
+.artists {
+    width: 20%;
+}
+
+.poster-img {
+    max-width: -webkit-fill-available;
+}

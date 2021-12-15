@@ -12,8 +12,14 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import { Link } from "react-router-dom";
+import { useAppContext } from "../../common/app-context/AppContext";
+import { useHistory } from "react-router-dom";
 
 const BookShow = (props) => {
+
+  const app = useAppContext();
+  const history = useHistory();
+
   const [location, setLocation] = useState("");
   const [theatre, setTheatre] = useState("");
   const [language, setLanguage] = useState("");
@@ -36,7 +42,12 @@ const BookShow = (props) => {
   useEffect(() => {
     let dataShows = null;
 
-    fetch(props.baseUrl + "movies/" + props.match.params.id + "/shows", {
+    if(!app.movie) {
+      history.push('/');
+      return;
+    }
+
+    fetch(props.baseUrl + "movies/" + app.movie.id + "/shows", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

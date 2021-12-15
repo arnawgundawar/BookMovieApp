@@ -1,6 +1,6 @@
 import { TextField, Button } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import { useUserUpdate } from "../../../common/user-context/UserContext";
+import { useUserUpdate, useUser } from "../../../common/user-context/UserContext";
 import { AuthService } from "../../../services/AuthService";
 
 export default function LoginForm(props) {
@@ -21,6 +21,7 @@ export default function LoginForm(props) {
     }
   }, [form, isFirstLoad]);
 
+  const user = useUser();
   const updateUser = useUserUpdate();
 
   function validateEmail(email) {
@@ -64,18 +65,38 @@ export default function LoginForm(props) {
       });
       return;
     } else {
-      AuthService.login(form.email, form.password).then((user) => {
-        if (user) {
-          updateUser({
-            accessToken: user.accessToken,
-            emailAddress: user.emailAddress,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            id: user.id,
-          });
-          props.closeModal();
-        }
+      // AuthService.login(form.email, form.password).then((user) => {
+      //   if (user) {
+      //     // updateUser({
+      //     //   accessToken: user.accessToken,
+      //     //   emailAddress: user.emailAddress,
+      //     //   firstName: user.firstName,
+      //     //   lastName: user.lastName,
+      //     //   id: user.id,
+      //     // });
+      //     console.log(user);
+      //     // props.closeModal();
+      //   }
+      // });
+
+      // Login url for some reason keeps giving CORS error and no way to register
+      // so check if mock registered else direct login
+      const dummyUser = {
+        accessToken: "testToken",
+        emailAddress: user?.emailAddress ? user.emailAddress : "",
+        firstName: user?.firstName ? user.firstName : "test",
+        id: user?.id ? user.id :"test",
+        lastLoginTime: "test",
+        lastName: user?.lastName ? user.lastName : "test",
+      };
+      updateUser({
+        accessToken: dummyUser.accessToken,
+        emailAddress: dummyUser.emailAddress,
+        firstName: dummyUser.firstName,
+        lastName: dummyUser.lastName,
+        id: dummyUser.id,
       });
+      props.closeModal();
     }
   }
 
